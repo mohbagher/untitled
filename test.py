@@ -41,7 +41,6 @@ def has_all_vowels(word):
 for word in scrabble.wordList:
     if has_all_vowels(word):
         print(word)
-    print ("hello")
 # endregion
 
 
