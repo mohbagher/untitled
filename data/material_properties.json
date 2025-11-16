@@ -1,0 +1,58 @@
+{
+  "materials": {
+    "vacuum": {
+      "permittivity": 8.854187817e-12,
+      "permeability": 1.25663706212e-6,
+      "conductivity": 0,
+      "description": "Free space / vacuum"
+    },
+    "air": {
+      "relative_permittivity": 1.00054,
+      "relative_permeability": 1.00000037,
+      "conductivity": 0,
+      "description": "Air at sea level"
+    },
+    "water": {
+      "relative_permittivity": 80.1,
+      "relative_permeability": 1.0,
+      "conductivity": 0.0005,
+      "description": "Pure water at 20°C"
+    },
+    "copper": {
+      "relative_permittivity": 1.0,
+      "relative_permeability": 0.999994,
+      "conductivity": 5.96e7,
+      "description": "Copper conductor"
+    },
+    "silicon": {
+      "relative_permittivity": 11.68,
+      "relative_permeability": 1.0,
+      "conductivity": 1e-3,
+      "description": "Silicon semiconductor"
+    },
+    "glass": {
+      "relative_permittivity": 4.5,
+      "relative_permeability": 1.0,
+      "conductivity": 1e-11,
+      "description": "Typical glass"
+    }
+  },
+  "constants": {
+    "speed_of_light": 299792458,
+    "permeability_of_free_space": 1.25663706212e-6,
+    "permittivity_of_free_space": 8.854187817e-12,
+    "elementary_charge": 1.602176634e-19,
+    "electron_mass": 9.1093837015e-31
+  },
+  "frequency_bands": {
+    "ELF": {"min": 3, "max": 30, "unit": "Hz", "description": "Extremely Low Frequency"},
+    "VLF": {"min": 3, "max": 30, "unit": "kHz", "description": "Very Low Frequency"},
+    "LF": {"min": 30, "max": 300, "unit": "kHz", "description": "Low Frequency"},
+    "MF": {"min": 300, "max": 3000, "unit": "kHz", "description": "Medium Frequency"},
+    "HF": {"min": 3, "max": 30, "unit": "MHz", "description": "High Frequency"},
+    "VHF": {"min": 30, "max": 300, "unit": "MHz", "description": "Very High Frequency"},
+    "UHF": {"min": 300, "max": 3000, "unit": "MHz", "description": "Ultra High Frequency"},
+    "SHF": {"min": 3, "max": 30, "unit": "GHz", "description": "Super High Frequency"},
+    "EHF": {"min": 30, "max": 300, "unit": "GHz", "description": "Extremely High Frequency"}
+  }
+}
