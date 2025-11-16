@@ -87,7 +87,7 @@ class TestElectricField(unittest.TestCase):
         
         E = electric_field_point_charge(q, r)
         
-        k = constants.value('Coulomb constant')
+        k = 1 / (4 * np.pi * constants.epsilon_0)
         expected = k * abs(q) / (r ** 2)
         self.assertAlmostEqual(E, expected, places=2)
     
@@ -99,9 +99,10 @@ class TestElectricField(unittest.TestCase):
         
         E = electric_field_multiple_charges(charges, positions, field_pos)
         
-        # At (0, 1), fields should add in y-direction
-        self.assertAlmostEqual(E[0], 0, places=10)  # x-component cancels
-        self.assertGreater(abs(E[1]), 0)  # y-component non-zero
+        # At (0, 1) on perpendicular bisector of dipole:
+        # y-components cancel by symmetry, x-components add
+        self.assertAlmostEqual(E[1], 0, places=10)  # y-component cancels
+        self.assertGreater(abs(E[0]), 0)  # x-component non-zero
     
     def test_field_at_charge_location(self):
         """Test field calculation near charge location."""
@@ -124,7 +125,7 @@ class TestElectricPotential(unittest.TestCase):
         
         V = electric_potential(q, r)
         
-        k = constants.value('Coulomb constant')
+        k = 1 / (4 * np.pi * constants.epsilon_0)
         expected = k * q / r
         self.assertAlmostEqual(V, expected, places=2)
     

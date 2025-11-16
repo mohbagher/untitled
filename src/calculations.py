@@ -45,7 +45,8 @@ def coulomb_force(q1, q2, r):
     if r <= 0:
         raise ValueError("Distance must be positive and non-zero")
     
-    k = constants.value('Coulomb constant')  # 8.987551787e9 N⋅m²/C²
+    # Coulomb's constant k = 1/(4πε₀)
+    k = 1 / (4 * np.pi * constants.epsilon_0)  # 8.987551787e9 N⋅m²/C²
     
     # Calculate force magnitude
     force_magnitude = k * abs(q1 * q2) / (r ** 2)
@@ -86,7 +87,7 @@ def electric_field_point_charge(q, r, position=None):
     >>> print(f"E-field magnitude: {E:.4f} N/C")
     E-field magnitude: 89875.5179 N/C
     """
-    k = constants.value('Coulomb constant')
+    k = 1 / (4 * np.pi * constants.epsilon_0)
     
     if position is not None:
         # Calculate vector field
@@ -131,7 +132,7 @@ def electric_field_multiple_charges(charges, charge_positions, field_position):
     >>> field_pos = np.array([0.5, 0.5])
     >>> E = electric_field_multiple_charges(charges, positions, field_pos)
     """
-    k = constants.value('Coulomb constant')
+    k = 1 / (4 * np.pi * constants.epsilon_0)
     charges = np.asarray(charges)
     charge_positions = np.asarray(charge_positions)
     field_position = np.asarray(field_position)
@@ -179,7 +180,7 @@ def electric_potential(q, r):
     if np.any(r <= 0):
         raise ValueError("Distance must be positive and non-zero")
     
-    k = constants.value('Coulomb constant')
+    k = 1 / (4 * np.pi * constants.epsilon_0)
     V = k * q / r
     return V
 
@@ -344,15 +345,17 @@ def dipole_radiation_pattern(theta, I0=1.0, length=None, wavelength=1.0):
     
     # Hertzian (short) dipole pattern
     if length is None or length < wavelength / 10:
-        pattern = np.sin(theta)
+        pattern = np.abs(np.sin(theta))
+        # Handle numerical precision issues at 0 and π
+        pattern = np.where(np.abs(pattern) < 1e-10, 0, pattern)
     else:
         # Half-wave dipole approximation
         pattern = np.cos(np.pi / 2 * np.cos(theta)) / np.sin(theta)
         # Handle singularities at theta=0 and theta=π
         pattern = np.where(np.abs(np.sin(theta)) < 1e-10, 0, pattern)
+        pattern = np.abs(pattern)
     
     # Normalize
-    pattern = np.abs(pattern)
     max_val = np.max(pattern)
     if max_val > 0:
         pattern = pattern / max_val
