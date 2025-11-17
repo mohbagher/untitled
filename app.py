@@ -21,13 +21,18 @@ C = 3e8  # Speed of light in m/s
 
 
 def db_to_linear(value_db: float) -> float:
-    """Convert dB quantity (power) to linear scale."""
-    return 10 ** (value_db / 10)
+    """Convert dB quantity (power) to linear scale for scalars or arrays."""
+    arr = np.asarray(value_db, dtype=float)
+    result = np.power(10, arr / 10)
+    return result if result.shape != () else float(result)
 
 
 def linear_to_db(value_linear: float) -> float:
-    """Convert linear quantity (power) to dB scale."""
-    return 10 * math.log10(value_linear)
+    """Convert linear quantity (power) to dB scale for scalars or arrays."""
+    arr = np.asarray(value_linear, dtype=float)
+    arr = np.maximum(arr, 1e-30)
+    result = 10 * np.log10(arr)
+    return result if result.shape != () else float(result)
 
 
 # --------------------------------------------------------------------------------------
