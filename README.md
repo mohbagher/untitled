@@ -168,6 +168,24 @@ untitled/
 
 ## 🛠️ Troubleshooting
 
+## 🚦 Running the RIS Dash dashboard
+
+The repository also includes an interactive Plotly Dash app (`app.py`) for exploring RIS-assisted path loss and SNR.
+
+1. **Install dependencies (from the project root):**
+```bash
+pip install -r requirements.txt
+```
+
+2. **Run the Dash server:**
+```bash
+python app.py
+```
+
+3. **Open the dashboard:** Visit [http://127.0.0.1:8050](http://127.0.0.1:8050) in your browser. The terminal will display the exact URL if a different port is chosen.
+
+If you are using the provided Codespace/terminal environment, run the commands above inside the `/workspace/untitled` directory. The app will start locally and can be accessed via the forwarded port.
+
 ### Jupyter Notebook Issues
 
 **Problem:** Widgets not displaying
